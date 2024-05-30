@@ -4,7 +4,7 @@ using SimpleStore.App.Data.Models;
 
 namespace SimpleStore.App.Products;
 
-public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Product>
+public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand>
 {
     private readonly SimpleStoreDbContext _dbContext;
 
@@ -12,7 +12,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
     {
         _dbContext = dbContext;
     }
-    public async Task<Product> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+    public async Task Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         var product = new Product(
             request.Title,
@@ -23,6 +23,5 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
 
         _dbContext.Products.Add(product);
         await _dbContext.SaveChangesAsync(cancellationToken);
-        return product;
     }
 }

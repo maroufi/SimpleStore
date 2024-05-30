@@ -3,7 +3,7 @@ using SimpleStore.App.Data.Models;
 
 namespace SimpleStore.App.Products;
 
-public class CreateProductCommand : IRequest<Product>
+public class CreateProductCommand : IRequest
 {
     public string? Title { get; set; }
     public int InventoryCount { get; set; }

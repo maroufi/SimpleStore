@@ -22,5 +22,12 @@ namespace SimpleStore.App.Controllers
             await _mediator.Send(command);
             return Ok();
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(IncreaseInventoryCountCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
     }
 }
