@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
+using Newtonsoft.Json;
+using SimpleStore.App.Products;
+using System.Text;
 
 namespace SimpleSales.Tests
 {
@@ -14,7 +17,16 @@ namespace SimpleSales.Tests
         [Fact]
         public async Task Should_Add_Product_With_Predefined_InventoryCount()
         {
-            var response = await _httpClient.PostAsync("/Products",null);
+            var createProductCommand = new CreateProductCommand
+            {
+                Title = "Test",
+                Discount = 10,
+                InventoryCount = 10,
+                Price = 33_000_000,
+            };
+            var serializedValue = JsonConvert.SerializeObject(createProductCommand);
+            var content = new StringContent(serializedValue, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("/Products",content);
             response.EnsureSuccessStatusCode();
         }
 

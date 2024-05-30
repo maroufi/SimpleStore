@@ -1,4 +1,6 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SimpleStore.App.Products;
 
 namespace SimpleStore.App.Controllers
 {
@@ -7,16 +9,17 @@ namespace SimpleStore.App.Controllers
     public class ProductsController : ControllerBase
     {
 
-        private readonly ILogger<ProductsController> _logger;
+        private readonly IMediator _mediator;
 
-        public ProductsController(ILogger<ProductsController> logger)
+        public ProductsController(IMediator mediator)
         {
-            _logger = logger;
+            _mediator = mediator;
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public async Task<IActionResult> Post(CreateProductCommand command)
         {
+            await _mediator.Send(command);
             return Ok();
         }
     }
