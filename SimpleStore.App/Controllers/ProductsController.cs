@@ -29,5 +29,15 @@ namespace SimpleStore.App.Controllers
             await _mediator.Send(command);
             return Ok();
         }
+
+        [HttpGet("{productId}")]
+        public async Task<IActionResult> Get(long productId)
+        {
+            var result = await _mediator.Send(new ProductPriceQuery
+            {
+                ProductId = productId
+            });
+            return Ok(result);
+        }
     }
 }

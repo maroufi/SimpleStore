@@ -30,4 +30,6 @@ public class Product
     public int InventoryCount { get; set; }
     public decimal Price { get; set; }
     public decimal Discount { get; set; }
+
+    public decimal FinalPrice => Math.Round(Price - (Price * Discount / 100));
 }
