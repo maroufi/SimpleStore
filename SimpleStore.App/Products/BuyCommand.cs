@@ -1,6 +1,8 @@
-﻿namespace SimpleStore.App.Products;
+﻿using SimpleStore.App.Base;
 
-public class BuyCommand : ICommand
+namespace SimpleStore.App.Products;
+
+public class BuyCommand : ICommand<Result>
 {
     public long ProductId { get; set; }
     public long BuyerId { get; set; }

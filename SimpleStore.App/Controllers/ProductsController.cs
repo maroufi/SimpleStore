@@ -19,14 +19,16 @@ namespace SimpleStore.App.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(CreateProductCommand command)
         {
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+            if (result.Failed) return BadRequest();
             return Ok();
         }
 
         [HttpPut]
         public async Task<IActionResult> Put(IncreaseInventoryCountCommand command)
         {
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+            if (result.Failed) return BadRequest();
             return Ok();
         }
 
@@ -37,7 +39,8 @@ namespace SimpleStore.App.Controllers
             {
                 ProductId = productId
             });
-            return Ok(result);
+            if (result.Failed) return BadRequest();
+            return Ok(result.Data);
         }
     }
 }

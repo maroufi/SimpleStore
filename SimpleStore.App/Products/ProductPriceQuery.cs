@@ -1,6 +1,8 @@
-﻿namespace SimpleStore.App.Products;
+﻿using SimpleStore.App.Base;
 
-public class ProductPriceQuery: IQuery<ProductPriceResult>
+namespace SimpleStore.App.Products;
+
+public class ProductPriceQuery: IQuery<Result<ProductPriceResult>>
 {
     public long ProductId { get; set; }
 }

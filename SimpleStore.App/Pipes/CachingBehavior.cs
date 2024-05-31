@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
-using SimpleStore.App.Products;
+using SimpleStore.App.Base;
 
 namespace SimpleStore.App.Pipes;
 public class CachingBehavior<TRequest, TResponse> :

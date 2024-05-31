@@ -1,30 +1,28 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
+using SimpleStore.App.Base;
 using SimpleStore.App.Data;
 
 namespace SimpleStore.App.Products;
 
-public class ProductPriceQueryHandler : IRequestHandler<ProductPriceQuery, ProductPriceResult>
+public class ProductPriceQueryHandler : 
+    IRequestHandler<ProductPriceQuery, Result<ProductPriceResult>>
 {
     private readonly SimpleStoreDbContext _dbContext;
-    private readonly IMemoryCache _cache;
 
     public ProductPriceQueryHandler(
-        SimpleStoreDbContext dbContext,
-        IMemoryCache cache)
+        SimpleStoreDbContext dbContext)
     {
         _dbContext = dbContext;
-        _cache = cache;
     }
-    public async Task<ProductPriceResult> Handle(ProductPriceQuery request,
+    public async Task<Result<ProductPriceResult>> Handle(ProductPriceQuery request,
         CancellationToken cancellationToken)
     {
         var product = await _dbContext.Products
             .Where(product => product.Id == request.ProductId)
             .FirstOrDefaultAsync(cancellationToken: cancellationToken);
 
-        if (product == null) throw new Exception("NotFound");
+        if (product == null) return Result.Fail<ProductPriceResult>("Product not found");
 
         return new ProductPriceResult
         {

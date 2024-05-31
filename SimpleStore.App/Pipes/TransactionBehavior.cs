@@ -1,6 +1,6 @@
 ﻿using MediatR;
+using SimpleStore.App.Base;
 using SimpleStore.App.Data;
-using SimpleStore.App.Products;
 
 namespace SimpleStore.App.Pipes;
 public class TransactionBehavior<TRequest, TResponse> : 

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace SimpleStore.App.Products;
+namespace SimpleStore.App.Base;
 
 public interface ICommand<TResponse> : IRequest<TResponse>
 {

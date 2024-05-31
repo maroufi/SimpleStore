@@ -18,7 +18,8 @@ namespace SimpleStore.App.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(BuyCommand command)
         {
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+            if (result.Failed) return BadRequest();
             return Ok();
         }
     }

@@ -1,6 +1,8 @@
-﻿namespace SimpleStore.App.Products;
+﻿using SimpleStore.App.Base;
 
-public class CreateProductCommand : ICommand
+namespace SimpleStore.App.Products;
+
+public class CreateProductCommand : ICommand<Result>
 {
     public string? Title { get; set; }
     public int InventoryCount { get; set; }

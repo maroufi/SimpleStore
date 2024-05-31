@@ -1,6 +1,8 @@
-﻿namespace SimpleStore.App.Products;
+﻿using SimpleStore.App.Base;
 
-public class IncreaseInventoryCountCommand : ICommand
+namespace SimpleStore.App.Products;
+
+public class IncreaseInventoryCountCommand : ICommand<Result>
 {
     public long ProductId { get; set; }
     public int IncreasingValue { get; set; }

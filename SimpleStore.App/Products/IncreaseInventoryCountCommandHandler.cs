@@ -1,12 +1,12 @@
 ﻿using MediatR;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using SimpleStore.App.Base;
 using SimpleStore.App.Data;
 
 namespace SimpleStore.App.Products;
 
 public class IncreaseInventoryCountCommandHandler :
-    IRequestHandler<IncreaseInventoryCountCommand>
+    IRequestHandler<IncreaseInventoryCountCommand, Result>
 {
     private readonly SimpleStoreDbContext _dbContext;
 
@@ -14,12 +14,15 @@ public class IncreaseInventoryCountCommandHandler :
     {
         _dbContext = dbContext;
     }
-    public async Task Handle(IncreaseInventoryCountCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(IncreaseInventoryCountCommand request, CancellationToken cancellationToken)
     {
-        string sql = "UPDATE Products SET InventoryCount = InventoryCount + @increasingValue WHERE Id = @productId";
+        var effectedRows = await _dbContext.Products
+            .Where(p => p.Id == request.ProductId)
+            .ExecuteUpdateAsync(setPropertyCalls => setPropertyCalls
+            .SetProperty(p => p.InventoryCount, p => p.InventoryCount + request.IncreasingValue),
+            cancellationToken: cancellationToken);
 
-        await _dbContext.Database.ExecuteSqlRawAsync(sql, 
-            new SqlParameter("@increasingValue", request.IncreasingValue),
-            new SqlParameter("@productId", request.ProductId));
+        if (effectedRows == 0) return Result.Fail("Product not found");
+        return Result.Ok();
     }
 }
