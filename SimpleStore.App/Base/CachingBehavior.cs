@@ -6,7 +6,7 @@ namespace SimpleStore.App.Base;
 public class CachingBehavior<TRequest, TResponse> :
     IPipelineBehavior<TRequest, TResponse>
     where TRequest : notnull, IQuery<TResponse>
-    where TResponse : notnull
+    where TResponse : notnull, Result
 {
     private readonly IMemoryCache _cache;
 
@@ -33,6 +33,7 @@ public class CachingBehavior<TRequest, TResponse> :
 
         TResponse response = await next();
 
+        if (response.Failed) return response;
         _cache.Set(cacheKey, response, TimeSpan.FromMinutes(cachableAttribute.DurationInMinutes));
 
         return response;

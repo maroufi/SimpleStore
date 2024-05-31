@@ -27,7 +27,7 @@ public class GetProductPriceTests : IClassFixture<WebApplicationFactory<Program>
     }
 
     [Fact]
-    public async Task Should_Get_Product_With_Applied_Discount_Price_From_Cach()
+    public async Task Should_Get_Product_With_Applied_Discount_Price_From_Cache()
     {
         await _httpClient.GetAsync("/Products/1");
         var response = await _httpClient.GetAsync("/Products/1");

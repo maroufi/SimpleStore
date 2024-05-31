@@ -3,7 +3,9 @@ using SimpleStore.App.Data;
 
 namespace SimpleStore.App.Base;
 public class TransactionBehavior<TRequest, TResponse> :
-    IPipelineBehavior<TRequest, TResponse> where TRequest : notnull, ICommand<TResponse>
+    IPipelineBehavior<TRequest, TResponse>
+    where TRequest : notnull, ICommand<TResponse>
+    where TResponse : Result
 {
     private readonly SimpleStoreDbContext _dbContext;
 
@@ -28,6 +30,11 @@ public class TransactionBehavior<TRequest, TResponse> :
 
             response = await next();
 
+            if (response.Failed)
+            {
+                await _dbContext.Database.RollbackTransactionAsync(cancellationToken);
+                return response;
+            }
             await _dbContext.Database.CommitTransactionAsync(cancellationToken);
         }
         catch
