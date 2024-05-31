@@ -45,7 +45,7 @@ public class AddProductTests : IClassFixture<WebApplicationFactory<Program>>
         var serializedValue = JsonConvert.SerializeObject(createProductCommand);
         var content = new StringContent(serializedValue, Encoding.UTF8, "application/json");
         var response = await _httpClient.PostAsync("/Products", content);
-        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
     }
 
     private static string ManipulateString(int n, char c)

@@ -1,8 +1,8 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using SimpleStore.App.Base;
 using SimpleStore.App.Controllers;
 using SimpleStore.App.Data;
-using SimpleStore.App.Pipes;
 
 var builder = WebApplication.CreateBuilder(args);
 

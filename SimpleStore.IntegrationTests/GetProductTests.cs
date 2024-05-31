@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using SimpleStore.App.Products;
-using System.Text;
 
 namespace SimpleStore.IntegrationTests;
 
-public class GetProductTests : IClassFixture<WebApplicationFactory<Program>>
+public class GetProductPriceTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly HttpClient _httpClient;
-    public GetProductTests(WebApplicationFactory<Program> factory)
+    public GetProductPriceTests(WebApplicationFactory<Program> factory)
     {
         _httpClient = factory.CreateClient();
     }

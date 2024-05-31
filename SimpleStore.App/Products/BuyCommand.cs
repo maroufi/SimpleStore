@@ -2,6 +2,7 @@
 
 namespace SimpleStore.App.Products;
 
+[Transactional]
 public class BuyCommand : ICommand<Result>
 {
     public long ProductId { get; set; }

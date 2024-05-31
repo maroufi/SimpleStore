@@ -2,7 +2,8 @@
 
 namespace SimpleStore.App.Products;
 
-public class ProductPriceQuery: IQuery<Result<ProductPriceResult>>
+[Cachable(60)]
+public class ProductPriceQuery : IQuery<Result<ProductPriceResult>>
 {
     public long ProductId { get; set; }
 }

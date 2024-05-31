@@ -11,6 +11,7 @@ public class Product
     }
 
     public long Id { get; set; }
+
     private string? title;
     public string? Title
     {
@@ -27,6 +28,7 @@ public class Product
             title = value;
         }
     }
+
     private int inventoryCount;
     public int InventoryCount 
     { 
@@ -37,6 +39,7 @@ public class Product
             inventoryCount = value;
         } 
     }
+
     public decimal Price { get; set; }
 
     private decimal discount;

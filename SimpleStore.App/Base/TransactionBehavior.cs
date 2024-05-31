@@ -1,10 +1,9 @@
 ﻿using MediatR;
-using SimpleStore.App.Base;
 using SimpleStore.App.Data;
 
-namespace SimpleStore.App.Pipes;
-public class TransactionBehavior<TRequest, TResponse> : 
-    IPipelineBehavior<TRequest, TResponse> where TRequest : notnull, ICommand
+namespace SimpleStore.App.Base;
+public class TransactionBehavior<TRequest, TResponse> :
+    IPipelineBehavior<TRequest, TResponse> where TRequest : notnull, ICommand<TResponse>
 {
     private readonly SimpleStoreDbContext _dbContext;
 
@@ -15,6 +14,13 @@ public class TransactionBehavior<TRequest, TResponse> :
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
+        var hasTransactionalAttribute = typeof(TRequest).GetCustomAttributes(typeof(TransactionalAttribute), false).Any();
+
+        if (!hasTransactionalAttribute)
+        {
+            return await next();
+        }
+
         TResponse? response;
         try
         {
@@ -22,7 +28,6 @@ public class TransactionBehavior<TRequest, TResponse> :
 
             response = await next();
 
-            //await _dbContext.SaveChangesAsync(cancellationToken);
             await _dbContext.Database.CommitTransactionAsync(cancellationToken);
         }
         catch
