@@ -27,9 +27,29 @@ public class Product
             title = value;
         }
     }
-    public int InventoryCount { get; set; }
+    private int inventoryCount;
+    public int InventoryCount 
+    { 
+        get { return inventoryCount; } 
+        set {
+            if(value < 0)
+                throw new ArgumentException("InventoryCount should not be negative");
+            inventoryCount = value;
+        } 
+    }
     public decimal Price { get; set; }
-    public decimal Discount { get; set; }
+
+    private decimal discount;
+    public decimal Discount 
+    { 
+        get { return discount; }
+        set
+        {
+            if (value < 0 || value > 100)
+                throw new ArgumentException("Discount should be in zero to 100 range");
+            discount = value;
+        }
+    }
 
     public decimal FinalPrice => Math.Round(Price - (Price * Discount / 100));
 }

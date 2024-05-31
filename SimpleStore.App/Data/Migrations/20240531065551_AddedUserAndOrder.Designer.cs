@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpleStore.App.Data;
 
@@ -11,9 +12,11 @@ using SimpleStore.App.Data;
 namespace SimpleStore.App.Data.Migrations
 {
     [DbContext(typeof(SimpleStoreDbContext))]
-    partial class SimpleStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240531065551_AddedUserAndOrder")]
+    partial class AddedUserAndOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -11,7 +11,7 @@ using SimpleStore.App.Data;
 namespace SimpleStore.App.Data.Migrations
 {
     [DbContext(typeof(SimpleStoreDbContext))]
-    [Migration("20240530134119_AddedProducts")]
+    [Migration("20240530194158_AddedProducts")]
     partial class AddedProducts
     {
         /// <inheritdoc />
@@ -33,8 +33,8 @@ namespace SimpleStore.App.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<decimal>("Discount")
-                        .HasPrecision(4, 2)
-                        .HasColumnType("decimal(4,2)");
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
 
                     b.Property<int>("InventoryCount")
                         .HasColumnType("int");

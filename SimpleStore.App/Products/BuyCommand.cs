@@ -1,6 +1,7 @@
 ﻿namespace SimpleStore.App.Products;
 
-public class ProductPriceQuery: IQuery<ProductPriceResult>
+public class BuyCommand : ICommand
 {
     public long ProductId { get; set; }
+    public long BuyerId { get; set; }
 }

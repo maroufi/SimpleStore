@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStore.App", "SimpleSt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1B5158FE-4A25-4F8B-9715-F8AE7BEFE915}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStore.IntegrationTests", "SimpleSales\SimpleStore.IntegrationTests.csproj", "{C79EBB05-4FC4-420F-8DCB-A1220981C0F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStore.IntegrationTests", "SimpleStore.IntegrationTests\SimpleStore.IntegrationTests.csproj", "{C79EBB05-4FC4-420F-8DCB-A1220981C0F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStore.UnitTests", "SimpleSales.UnitTests\SimpleStore.UnitTests.csproj", "{C1E0DD83-F011-4F7B-BDCC-371BFA2C7AC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStore.UnitTests", "SimpleStore.UnitTests\SimpleStore.UnitTests.csproj", "{C1E0DD83-F011-4F7B-BDCC-371BFA2C7AC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

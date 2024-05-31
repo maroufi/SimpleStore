@@ -1,10 +1,7 @@
-﻿using MediatR;
+﻿namespace SimpleStore.App.Products;
 
-namespace SimpleStore.App.Products
+public class IncreaseInventoryCountCommand : ICommand
 {
-    public class IncreaseInventoryCountCommand : IRequest
-    {
-        public long ProductId { get; set; }
-        public int IncreasingValue { get; set; }
-    }
+    public long ProductId { get; set; }
+    public int IncreasingValue { get; set; }
 }

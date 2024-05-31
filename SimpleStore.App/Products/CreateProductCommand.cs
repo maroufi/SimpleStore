@@ -1,9 +1,6 @@
-﻿using MediatR;
-using SimpleStore.App.Data.Models;
+﻿namespace SimpleStore.App.Products;
 
-namespace SimpleStore.App.Products;
-
-public class CreateProductCommand : IRequest
+public class CreateProductCommand : ICommand
 {
     public string? Title { get; set; }
     public int InventoryCount { get; set; }

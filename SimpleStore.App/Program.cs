@@ -1,6 +1,8 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SimpleStore.App.Controllers;
 using SimpleStore.App.Data;
+using SimpleStore.App.Pipes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,8 @@ builder.Services.AddMediatR(configuration =>
 {
     configuration.RegisterServicesFromAssemblyContaining(typeof(Program));
 });
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
 
 var configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -21,6 +25,7 @@ builder.Services.AddDbContext<SimpleStoreDbContext>(optionBuilder =>
 {
     optionBuilder.UseSqlServer(configuration.GetConnectionString("SimpleStore"));
 });
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 
