@@ -15,14 +15,15 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
     }
     public async Task<Result> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
-        var product = new Product(
+        var result = Product.Create(
             request.Title,
             request.InventoryCount,
             request.Price,
             request.Discount
         );
+        if(result.Failed) return result;
 
-        _dbContext.Products.Add(product);
+        _dbContext.Products.Add(result.Data);
         await _dbContext.SaveChangesAsync(cancellationToken);
         return Result.Ok();
     }

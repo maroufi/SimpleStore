@@ -3,11 +3,11 @@ using System.Net;
 
 namespace SimpleStore.App.Controllers;
 
-public class GlobalExceptionMiddleware
+public class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;
 
-    public GlobalExceptionMiddleware(RequestDelegate next)
+    public ExceptionHandlingMiddleware(RequestDelegate next)
     {
         _next = next;
     }

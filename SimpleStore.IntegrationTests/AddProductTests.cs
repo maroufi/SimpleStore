@@ -50,7 +50,7 @@ public class AddProductTests : IClassFixture<WebApplicationFactory<Program>>
 
     private static string ManipulateString(int n, char c)
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
 
         for (int i = 0; i < n; i++)
         {
